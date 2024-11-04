@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Learning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #f0f0f0, #dde1e7);
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background-color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        main {
+            padding: 40px;
+            text-align: center;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            min-height: 60vh;
+        }
+        .section {
+            display: none;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        /* Flashcard Styling */
+        .flashcard {
+            width: 200px;
+            height: 300px;
+            background-color: #007BFF;
+            color: white;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            position: relative;
+            perspective: 1000px;
+        }
+        .flashcard-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+            background-color: #555;
+        }
+        /* Quiz Button Design */
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function flipCard(cardId) {
+            var card = document.getElementById(cardId);
+            card.classList.toggle('flipped');
+        }
+
+        function checkAnswers() {
+            var correct = 0;
+            var q1 = document.getElementsByName('q1');
+            var q2 = document.getElementsByName('q2');
+
+            if (q1[1].checked) {
+                correct++;
+            }
+
+            if (q2[0].checked) {
+                correct++;
+            }
+
+            document.getElementById('quiz-result').innerText = 'You got ' + correct + ' out of 2 correct!';
+        }
+    </script>
+</head>
+<body onload="showSection('home')">
+
+    <header>
+        <h1>Arithmetic Learning</h1>
+    </header>
+
+    <nav>
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('sequence')">Sequences</a>
+        <a onclick="showSection('means')">Means</a>
+        <a onclick="showSection('quiz')">Quiz</a>
+        <a onclick="showSection('contact')">Contact Us</a>
+    </nav>
+
+    <main>
+        <!-- Home Section -->
+        <div id="home" class="section">
+            <h1>Welcome to Arithmetic Learning</h1>
+            <p>Explore different topics like Arithmetic Sequences and Means, and test your knowledge with a quiz!</p>
+        </div>
+
+        <!-- Sequences Section -->
+        <div id="sequence" class="section">
+            <h1>Arithmetic Sequences</h1>
+            <p>An arithmetic sequence is a sequence of numbers where the difference between consecutive terms is constant.</p>
+            <div id="flashcard-sequence" class="flashcard" onclick="flipCard('flashcard-sequence')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <p>Click to Flip!</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <p>The common difference is constant!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Means Section -->
+        <div id="means" class="section">
+            <h1>Arithmetic Means</h1>
+            <p>The arithmetic mean is the sum of numbers divided by the count of the numbers in the collection.</p>
+            <div id="flashcard-means" class="flashcard" onclick="flipCard('flashcard-means')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <p>Click to Flip!</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <p>The mean is the average!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <!-- Quiz Section -->
+<div id="quiz" class="section">
+    <h1>Quiz</h1>
+    <div id="question-set-1">
+        <h3>Arithmetic Sequence Quiz (Set 1)</h3>
+        <form id="quiz-form-1">
+            <label for="q1">What is the common difference in the sequence 3, 6, 9, 12?</label><br>
+            <input type="radio" name="q1" value="1"> 1<br>
+            <input type="radio" name="q1" value="3"> 3<br><br>
+
+            <label for="q2">What is the arithmetic mean of 5, 10, and 15?</label><br>
+            <input type="radio" name="q2" value="10"> 10<br>
+            <input type="radio" name="q2" value="15"> 15<br><br>
+
+            <button type="button" onclick="checkAnswers('quiz-form-1', 'quiz-result-1')">Submit</button>
+        </form>
+        <p id="quiz-result-1"></p>
+    </div>
+
+    <div id="question-set-2" style="display:none;">
+        <h3>Arithmetic Sequence Quiz (Set 2)</h3>
+        <form id="quiz-form-2">
+            <label for="q3">What is the common difference in the sequence 2, 4, 6, 8?</label><br>
+            <input type="radio" name="q3" value="1"> 2<br>
+            <input type="radio" name="q3" value="4"> 4<br><br>
+
+            <label for="q4">What is the arithmetic mean of 2, 4, and 6?</label><br>
+            <input type="radio" name="q4" value="4"> 4<br>
+            <input type="radio" name="q4" value="6"> 6<br><br>
+
+            <button type="button" onclick="checkAnswers('quiz-form-2', 'quiz-result-2')">Submit</button>
+        </form>
+        <p id="quiz-result-2"></p>
+    </div>
+
+    <button id="next-set-button" style="display:none;" onclick="switchQuestionSet()">Next Set of Questions</button>
+</div>
+
+<script>
+    function checkAnswers(formId, resultId) {
+        var form = document.getElementById(formId);
+        var correct = 0;
+        var inputs = form.getElementsByTagName('input');
+
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].type === 'radio' && inputs[i].checked) {
+                if (inputs[i].value === '3' || inputs[i].value === '10' || inputs[i].value === '2' || inputs[i].value === '4') {
+                    correct++;
+                }
+            }
+        }
+
+        document.getElementById(resultId).innerText = 'You got ' + correct + ' out of 2 correct!';
+        document.getElementById('next-set-button').style.display = 'block';
+    }
+
+    function switchQuestionSet() {
+        var set1 = document.getElementById('question-set-1');
+        var set2 = document.getElementById('question-set-2');
+
+        if (set1.style.display === 'none') {
+            set1.style.display = 'block';
+            set2.style.display = 'none';
+        } else {
+            set1.style.display = 'none';
+            set2.style.display = 'block';
+        }
+
+        document.getElementById('next-set-button').style.display = 'none';
+    }
+</script>
+
+        <!-- Contact Us Section -->
+        <div id="contact" class="section">
+            <h1>Contact Us</h1>
+            <form action="send_email.php" method="post">
+                <input type="text" name="name" placeholder="Your Name" required><br>
+                <input type="email" name="email" placeholder="Your Email" required><br>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea><br>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>
